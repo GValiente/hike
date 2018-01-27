@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['operator_28_29',['operator()',['../classhike_1_1CachedLossFunction.html#ae300d2264cb915a5496b13087110462c',1,'hike::CachedLossFunction']]],
+  ['optimize',['optimize',['../classhike_1_1BILocalSearch.html#a7ace2d648dfa5bc8e5a6d1b28794422d',1,'hike::BILocalSearch::optimize(SolutionType &amp;&amp;solution)'],['../classhike_1_1BILocalSearch.html#a378c40155959b2e3e27b850af5414598',1,'hike::BILocalSearch::optimize(SolutionType &amp;&amp;solution, bool &amp;optimized)'],['../classhike_1_1FILocalSearch.html#a91c1d7667e3c5d8314000200d6a5ef1e',1,'hike::FILocalSearch::optimize(SolutionType &amp;&amp;solution)'],['../classhike_1_1FILocalSearch.html#a8c975820eb5968c425497f3b63730fb4',1,'hike::FILocalSearch::optimize(SolutionType &amp;&amp;solution, bool &amp;optimized)'],['../classhike_1_1VNS.html#a054a9fa460d1525f8540a75b7a445c48',1,'hike::VNS::optimize(SolutionType &amp;&amp;solution)'],['../classhike_1_1VNS.html#aa1b0873c555c971db1cf3ae679c62fd6',1,'hike::VNS::optimize(SolutionType &amp;&amp;solution, bool &amp;optimized)']]]
+];
