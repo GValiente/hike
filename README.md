@@ -13,6 +13,8 @@ It currently only provides a [variable neighborhood search (VNS)](https://en.wik
 - Calculated losses can be cached to speedup the optimization process.
 - Low overhead, no heap usage (besides loss caching).
 - Without dependencies (besided [catch](https://github.com/catchorg/Catch2) for testing).
+- [Doxygen documentation](https://gvaliente.github.io/hike/) provided for API reference.
+- Licensed under [zlib license](LICENSE.txt).
 
 ## Tested compilers
 
@@ -85,7 +87,7 @@ TEST_CASE("VNS example")
 
 ## Using loss caching
 
-With hike::CachedLossFunction class, calculated losses for the same solutions are cached to avoid to recalculate them in next iterations:
+With [hike::CachedLossFunction](https://gvaliente.github.io/hike/classhike_1_1CachedLossFunction.html) class, calculated losses for the same solutions are cached to avoid to recalculate them in following iterations:
 
 ```C++
 #include <array>
@@ -170,9 +172,3 @@ TEST_CASE("CachedLossFunction example")
 }
 ```
 
-## API Reference
-
-Doxygen documentation can be generated for API reference.
-
-## License
-The library is licensed under [zlib license](LICENSE.txt).
