@@ -44,7 +44,7 @@ TEST_CASE("VNS example")
     {
         Solution targetSolution;
 
-        int getLoss(const Solution& solution) const
+        int operator()(const Solution& solution) const
         {
             int loss = 0;
 
@@ -127,7 +127,7 @@ TEST_CASE("CachedLossFunction example")
     {
         Solution targetSolution;
 
-        int getLoss(const Solution& solution) const
+        int operator()(const Solution& solution) const
         {
             int loss = 0;
 
