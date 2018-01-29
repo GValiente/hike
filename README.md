@@ -14,7 +14,7 @@ It currently only provides a [variable neighborhood search (VNS)](https://en.wik
 - Best improvement local search can be parallelized across all CPU threads.
 - Low overhead, no heap usage (besides loss caching and parallel local search).
 - Without dependencies (besided [catch](https://github.com/catchorg/Catch2) for testing).
-- [Doxygen documentation](https://gvaliente.github.io/hike/) provided for API reference.
+- Doxygen documentation provided for API reference.
 - Licensed under [zlib license](LICENSE.txt).
 
 ## Tested compilers
@@ -88,7 +88,7 @@ TEST_CASE("VNS example")
 
 ## Using loss caching
 
-With [hike::CachedLossFunction](https://gvaliente.github.io/hike/classhike_1_1CachedLossFunction.html) class, calculated losses for the same solutions are cached to avoid to recalculate them in following iterations:
+With hike::CachedLossFunction class, calculated losses for the same solutions are cached to avoid to recalculate them in following iterations:
 
 ```C++
 #include <array>
