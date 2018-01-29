@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cachedlossfunction',['CachedLossFunction',['../classhike_1_1CachedLossFunction.html#ad03fc35110e16894eb2f99d1acc3cad6',1,'hike::CachedLossFunction::CachedLossFunction(const LossFunction &amp;lossFunction)'],['../classhike_1_1CachedLossFunction.html#a25a7a5901c9a242344c97e2eae4fdde5',1,'hike::CachedLossFunction::CachedLossFunction(LossFunction &amp;&amp;lossFunction)']]]
+  ['bilocalsearch',['BILocalSearch',['../classhike_1_1BILocalSearch.html#a72592f56f576cbfc9dfcc699e93f07a3',1,'hike::BILocalSearch']]]
 ];

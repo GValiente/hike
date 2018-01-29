@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['operator_28_29',['operator()',['../classhike_1_1CachedLossFunction.html#ae300d2264cb915a5496b13087110462c',1,'hike::CachedLossFunction']]],
-  ['optimize',['optimize',['../classhike_1_1BILocalSearch.html#a7ace2d648dfa5bc8e5a6d1b28794422d',1,'hike::BILocalSearch::optimize(SolutionType &amp;&amp;solution)'],['../classhike_1_1BILocalSearch.html#a378c40155959b2e3e27b850af5414598',1,'hike::BILocalSearch::optimize(SolutionType &amp;&amp;solution, bool &amp;optimized)'],['../classhike_1_1FILocalSearch.html#a91c1d7667e3c5d8314000200d6a5ef1e',1,'hike::FILocalSearch::optimize(SolutionType &amp;&amp;solution)'],['../classhike_1_1FILocalSearch.html#a8c975820eb5968c425497f3b63730fb4',1,'hike::FILocalSearch::optimize(SolutionType &amp;&amp;solution, bool &amp;optimized)'],['../classhike_1_1VNS.html#a054a9fa460d1525f8540a75b7a445c48',1,'hike::VNS::optimize(SolutionType &amp;&amp;solution)'],['../classhike_1_1VNS.html#aa1b0873c555c971db1cf3ae679c62fd6',1,'hike::VNS::optimize(SolutionType &amp;&amp;solution, bool &amp;optimized)']]]
+  ['getkmax',['getKmax',['../classhike_1_1VNS.html#ad96b02434433c7adfa1beb1e3512cfa3',1,'hike::VNS']]],
+  ['getlocalsearch',['getLocalSearch',['../classhike_1_1VNS.html#a2b6ad7063b3f9b2951bf8e18d99408a4',1,'hike::VNS::getLocalSearch() const noexcept'],['../classhike_1_1VNS.html#a9406b59f61bc39f61b311ddb34d69688',1,'hike::VNS::getLocalSearch() noexcept']]],
+  ['getlossfunction',['getLossFunction',['../classhike_1_1LocalSearchBase.html#adf3c8d765dc38f81a7b8a8e59d0dba1b',1,'hike::LocalSearchBase::getLossFunction() const noexcept'],['../classhike_1_1LocalSearchBase.html#a821e5180a76287a5f4c5bde5cf825981',1,'hike::LocalSearchBase::getLossFunction() noexcept']]],
+  ['getneighborhood',['getNeighborhood',['../classhike_1_1LocalSearchBase.html#a205cd9596e5349184236afd196f61b4b',1,'hike::LocalSearchBase']]]
 ];

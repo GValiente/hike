@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['bilocalsearch',['BILocalSearch',['../classhike_1_1BILocalSearch.html',1,'hike']]],
-  ['bilocalsearch',['BILocalSearch',['../classhike_1_1BILocalSearch.html#a72592f56f576cbfc9dfcc699e93f07a3',1,'hike::BILocalSearch']]]
+  ['add',['add',['../classhike_1_1ThreadPool.html#a6029e48abc713a1bc7c3d25e2e7c1cf1',1,'hike::ThreadPool']]]
 ];

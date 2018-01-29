@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['filocalsearch',['FILocalSearch',['../classhike_1_1FILocalSearch.html',1,'hike']]],
-  ['filocalsearch',['FILocalSearch',['../classhike_1_1FILocalSearch.html#a5ae1243cef50b621908339c1a6f35092',1,'hike::FILocalSearch']]]
+  ['cachedlossfunction',['CachedLossFunction',['../classhike_1_1CachedLossFunction.html',1,'hike']]],
+  ['cachedlossfunction',['CachedLossFunction',['../classhike_1_1CachedLossFunction.html#a52b096b6ec5f1e65d51a362f636fc5d1',1,'hike::CachedLossFunction::CachedLossFunction(const LossFunction &amp;lossFunction)'],['../classhike_1_1CachedLossFunction.html#aaf53373b1094e156ec265eb294f446c0',1,'hike::CachedLossFunction::CachedLossFunction(LossFunction &amp;&amp;lossFunction)']]]
 ];

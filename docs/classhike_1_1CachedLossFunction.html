@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>hike: hike::CachedLossFunction&lt; Solution, LossFunction, LossType &gt; Class Template Reference</title>
+<title>hike: hike::CachedLossFunction&lt; Solution, LossFunction &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,10 +89,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classhike_1_1CachedLossFunction-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">hike::CachedLossFunction&lt; Solution, LossFunction, LossType &gt; Class Template Reference</div>  </div>
+<div class="title">hike::CachedLossFunction&lt; Solution, LossFunction &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -101,36 +102,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><code>#include &lt;<a class="el" href="hike__cached__loss__function_8h_source.html">hike_cached_loss_function.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:adde9ae846d06ea50a24d80d6d1a4f34b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhike_1_1CachedLossFunction.html#adde9ae846d06ea50a24d80d6d1a4f34b">LossType</a> = typename std::result_of&lt; LossFunction(const Solution &amp;)&gt;::type</td></tr>
+<tr class="separator:adde9ae846d06ea50a24d80d6d1a4f34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad03fc35110e16894eb2f99d1acc3cad6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhike_1_1CachedLossFunction.html#ad03fc35110e16894eb2f99d1acc3cad6">CachedLossFunction</a> (const LossFunction &amp;lossFunction)</td></tr>
-<tr class="memdesc:ad03fc35110e16894eb2f99d1acc3cad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class constructor.  <a href="#ad03fc35110e16894eb2f99d1acc3cad6">More...</a><br /></td></tr>
-<tr class="separator:ad03fc35110e16894eb2f99d1acc3cad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25a7a5901c9a242344c97e2eae4fdde5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhike_1_1CachedLossFunction.html#a25a7a5901c9a242344c97e2eae4fdde5">CachedLossFunction</a> (LossFunction &amp;&amp;lossFunction)</td></tr>
-<tr class="memdesc:a25a7a5901c9a242344c97e2eae4fdde5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class constructor.  <a href="#a25a7a5901c9a242344c97e2eae4fdde5">More...</a><br /></td></tr>
-<tr class="separator:a25a7a5901c9a242344c97e2eae4fdde5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae300d2264cb915a5496b13087110462c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae300d2264cb915a5496b13087110462c"></a>
-LossType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhike_1_1CachedLossFunction.html#ae300d2264cb915a5496b13087110462c">operator()</a> (const Solution &amp;solution)</td></tr>
-<tr class="memdesc:ae300d2264cb915a5496b13087110462c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the loss of the given solution. <br /></td></tr>
-<tr class="separator:ae300d2264cb915a5496b13087110462c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52b096b6ec5f1e65d51a362f636fc5d1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhike_1_1CachedLossFunction.html#a52b096b6ec5f1e65d51a362f636fc5d1">CachedLossFunction</a> (const LossFunction &amp;lossFunction)</td></tr>
+<tr class="memdesc:a52b096b6ec5f1e65d51a362f636fc5d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class constructor.  <a href="#a52b096b6ec5f1e65d51a362f636fc5d1">More...</a><br /></td></tr>
+<tr class="separator:a52b096b6ec5f1e65d51a362f636fc5d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf53373b1094e156ec265eb294f446c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhike_1_1CachedLossFunction.html#aaf53373b1094e156ec265eb294f446c0">CachedLossFunction</a> (LossFunction &amp;&amp;lossFunction)</td></tr>
+<tr class="memdesc:aaf53373b1094e156ec265eb294f446c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class constructor.  <a href="#aaf53373b1094e156ec265eb294f446c0">More...</a><br /></td></tr>
+<tr class="separator:aaf53373b1094e156ec265eb294f446c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a603f9d08759ce23b98bed443638cec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a603f9d08759ce23b98bed443638cec"></a>
+<a class="el" href="classhike_1_1CachedLossFunction.html#adde9ae846d06ea50a24d80d6d1a4f34b">LossType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhike_1_1CachedLossFunction.html#a8a603f9d08759ce23b98bed443638cec">operator()</a> (const Solution &amp;solution)</td></tr>
+<tr class="memdesc:a8a603f9d08759ce23b98bed443638cec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the loss of the given solution. <br /></td></tr>
+<tr class="separator:a8a603f9d08759ce23b98bed443638cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class Solution, class LossFunction, typename LossType&gt;<br />
-class hike::CachedLossFunction&lt; Solution, LossFunction, LossType &gt;</h3>
+<div class="textblock"><h3>template&lt;class Solution, class LossFunction&gt;<br />
+class hike::CachedLossFunction&lt; Solution, LossFunction &gt;</h3>
 
 <p>Remembers previously calculated losses. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad03fc35110e16894eb2f99d1acc3cad6"></a>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a class="anchor" id="adde9ae846d06ea50a24d80d6d1a4f34b"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Solution , class LossFunction , typename LossType &gt; </div>
+template&lt;class Solution , class LossFunction &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classhike_1_1CachedLossFunction.html">hike::CachedLossFunction</a>&lt; Solution, LossFunction &gt;::<a class="el" href="classhike_1_1CachedLossFunction.html#adde9ae846d06ea50a24d80d6d1a4f34b">LossType</a> =  typename std::result_of&lt;LossFunction(const Solution&amp;)&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Loss function return type. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a52b096b6ec5f1e65d51a362f636fc5d1"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Solution , class LossFunction &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhike_1_1CachedLossFunction.html">hike::CachedLossFunction</a>&lt; Solution, LossFunction, LossType &gt;::<a class="el" href="classhike_1_1CachedLossFunction.html">CachedLossFunction</a> </td>
+          <td class="memname"><a class="el" href="classhike_1_1CachedLossFunction.html">hike::CachedLossFunction</a>&lt; Solution, LossFunction &gt;::<a class="el" href="classhike_1_1CachedLossFunction.html">CachedLossFunction</a> </td>
           <td>(</td>
           <td class="paramtype">const LossFunction &amp;&#160;</td>
           <td class="paramname"><em>lossFunction</em></td><td>)</td>
@@ -154,17 +176,17 @@ template&lt;class Solution , class LossFunction , typename LossType &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a25a7a5901c9a242344c97e2eae4fdde5"></a>
+<a class="anchor" id="aaf53373b1094e156ec265eb294f446c0"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Solution , class LossFunction , typename LossType &gt; </div>
+template&lt;class Solution , class LossFunction &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classhike_1_1CachedLossFunction.html">hike::CachedLossFunction</a>&lt; Solution, LossFunction, LossType &gt;::<a class="el" href="classhike_1_1CachedLossFunction.html">CachedLossFunction</a> </td>
+          <td class="memname"><a class="el" href="classhike_1_1CachedLossFunction.html">hike::CachedLossFunction</a>&lt; Solution, LossFunction &gt;::<a class="el" href="classhike_1_1CachedLossFunction.html">CachedLossFunction</a> </td>
           <td>(</td>
           <td class="paramtype">LossFunction &amp;&amp;&#160;</td>
           <td class="paramname"><em>lossFunction</em></td><td>)</td>

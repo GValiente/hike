@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['setkmax',['setKmax',['../classhike_1_1VNS.html#ad7030f8c2d0281a2198ddfed2a3727fc',1,'hike::VNS']]],
-  ['setneighborhood',['setNeighborhood',['../classhike_1_1LocalSearchBase.html#ad8cb9ae794326b93bfbd3b7490c76998',1,'hike::LocalSearchBase']]]
+  ['join',['join',['../classhike_1_1ThreadPool.html#a65b0885dbe9a4e5685ded253fb86c00d',1,'hike::ThreadPool']]]
 ];
