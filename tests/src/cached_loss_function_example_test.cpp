@@ -30,7 +30,7 @@ namespace std
 
 TEST_CASE("CachedLossFunction example")
 {
-    // Loss function return an integer scalar. It can be of any type:
+    // Loss function returns an integer scalar. It can be of any type:
     struct LossFunction
     {
         Solution targetSolution;
@@ -53,7 +53,7 @@ TEST_CASE("CachedLossFunction example")
     LossFunction lossFunction{targetSolution};
 
     // Declare cached loss function object using lossFunction as implementation:
-    using CachedLossFunction = hike::CachedLossFunction<Solution, LossFunction, int>;
+    using CachedLossFunction = hike::CachedLossFunction<Solution, LossFunction>;
     CachedLossFunction cachedLossFunction(lossFunction);
 
     // VNS uses first improvement (first descent) local search.

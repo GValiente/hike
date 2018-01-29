@@ -8,7 +8,7 @@ TEST_CASE("VNS example")
     // Solution is a 3D integer vector. It can be of any type and size:
     using Solution = std::array<int, 3>;
 
-    // Loss function return an integer scalar. It can be of any type:
+    // Loss function returns an integer scalar. It can be of any type:
     struct LossFunction
     {
         Solution targetSolution;
