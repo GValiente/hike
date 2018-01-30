@@ -287,30 +287,30 @@ TEST_CASE("OnImprovedSolution example")
         Solution targetSolution;
 
         int operator()(const Solution& solution) const
-		{
-			int loss = 0;
+        {
+            int loss = 0;
 
-				for(std::size_t i = 0; i < solution.size(); ++i)
-			{
-				loss += std::abs(solution[i] - targetSolution[i]);
-			}
+            for(std::size_t i = 0; i < solution.size(); ++i)
+            {
+                loss += std::abs(solution[i] - targetSolution[i]);
+            }
 
-				return loss;
-		}
+            return loss;
+        }
     };
 
     // Callback called when a given solution has been improved in an optimization algorithm.
     struct OnImprovedSolution
     {
         void operator()(const Solution& inputSolution, int inputLoss, const Solution& improvedSolution,
-	                int improvedLoss, int k) const noexcept
-		{
-			std::cout << "Solution improved (k=" << k << ")! ";
-			std::cout << "From (" << inputSolution[0] << ", " << inputSolution[1] << ") ";
-			std::cout << "(loss=" << inputLoss << ") ";
-			std::cout << "to (" << improvedSolution[0] << ", " << improvedSolution[1] << ") ";
-			std::cout << "(loss=" << improvedLoss << ") " << std::endl;
-		}
+                        int improvedLoss, int k) const noexcept
+        {
+            std::cout << "Solution improved (k=" << k << ")! ";
+            std::cout << "From (" << inputSolution[0] << ", " << inputSolution[1] << ") ";
+            std::cout << "(loss=" << inputLoss << ") ";
+            std::cout << "to (" << improvedSolution[0] << ", " << improvedSolution[1] << ") ";
+            std::cout << "(loss=" << improvedLoss << ") " << std::endl;
+        }
     };
 
     // Loss function returns the Manhattan distance between the target solution and the given one:
@@ -328,12 +328,12 @@ TEST_CASE("OnImprovedSolution example")
     LocalSearch localSearch(lossFunction, stepSolution);
 
     // Declare VNS object with a maximum neighborhood (kmax) of 5 and the solution improved callback class:
-    hike::VNS<Solution, LocalSearch, OnImprovedSolution> vns(localSearch, 5);
+    hike::VNS<Solution, LocalSearch, OnImprovedSolution> vns(localSearch, 5, OnImprovedSolution());
 
     // Optimize a solution:
     Solution solution{{ 15, -7 }};
     bool optimized;
-    Solution optimizedSolution = vns.optimize(solution, optimized, OnImprovedSolution());
+    Solution optimizedSolution = vns.optimize(solution, optimized);
 
     // The optimized solution should be equals to the target one:
     REQUIRE(optimized);
