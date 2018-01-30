@@ -25,7 +25,9 @@ It currently only provides a [variable neighborhood search (VNS)](https://en.wik
 
 ## Usage
 
-Although hike is a header-only library, a CMakeLists.txt file is provided to facilitate being added as a dependency.
+Although hike is a header-only library, a CMakeLists.txt file is provided to facilitate being added as a dependency.  
+
+Doxygen documentation can be generated with `doxygen Doxyfile`.
 
 ## Example
 
@@ -90,7 +92,7 @@ TEST_CASE("VNS example")
 
 ## Using loss caching
 
-With hike::CachedLossFunction class, calculated losses for the same solutions are cached to avoid to recalculate them in following iterations:
+With `hike::CachedLossFunction` class, calculated losses for the same solutions are cached to avoid to recalculate them in following iterations:
 
 ```C++
 #include <array>
@@ -177,9 +179,9 @@ TEST_CASE("CachedLossFunction example")
 
 ## Parallel best improvement local search
 
-hike::ParallelBILocalSearch class provides multithread best improvement (highest descent) local search.  
+`hike::ParallelBILocalSearch` class provides multithread best improvement (highest descent) local search.  
 
-To use it, the provided loss function must be thread safe. hike::TSCachedLossFunction provides thread safe loss caching:
+To use it, the provided loss function must be thread safe. `hike::TSCachedLossFunction` class provides thread safe loss caching:
 
 ```C++
 #include <array>
@@ -299,7 +301,7 @@ TEST_CASE("OnImprovedSolution example")
         }
     };
 
-    // Callback called when a given solution has been improved in an optimization algorithm.
+    // Callback called when a given solution has been improved in an optimization algorithm:
     struct OnImprovedSolution
     {
         void operator()(const Solution& inputSolution, int inputLoss, const Solution& improvedSolution,

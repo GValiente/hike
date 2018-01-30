@@ -27,7 +27,7 @@ TEST_CASE("OnImprovedSolution example")
         }
     };
 
-    // Callback called when a given solution has been improved in an optimization algorithm.
+    // Callback called when a given solution has been improved in an optimization algorithm:
     struct OnImprovedSolution
     {
         void operator()(const Solution& inputSolution, int inputLoss, const Solution& improvedSolution,
