@@ -4,6 +4,8 @@
 #include "hike_parallel_bi_local_search.h"
 #include "hike_vns.h"
 
+#include "hike_thread_pool.h"
+
 // Solution is a 3D integer vector. It can be of any type and size:
 using Solution = std::array<int, 3>;
 
@@ -15,15 +17,15 @@ namespace std
     {
         std::size_t operator()(const Solution& solution) const
         {
-            std::size_t hash = 0;
+            std::size_t result = 0;
 
             for(int param : solution)
             {
                 // https://stackoverflow.com/questions/2590677/how-do-i-combine-hash-values-in-c0x:
-                hash ^= std::hash<int>()(param) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+                result ^= std::hash<int>()(param) + 0x9e3779b9 + (result << 6) + (result >> 2);
             }
 
-            return hash;
+            return result;
         }
     };
 }

@@ -20,7 +20,7 @@
 #define HIKE_VNS_H
 
 #include <utility>
-#include "hike_common.h"
+#include "hike_empty_on_improved_solution.h"
 
 namespace hike
 {
@@ -33,7 +33,7 @@ namespace hike
  *
  * https://en.wikipedia.org/wiki/Variable_neighborhood_search
  */
-template<class Solution, class LocalSearch>
+template<class Solution, class LocalSearch, class OnImprovedSolution = EmptyOnImprovedSolution>
 class VNS
 {
 
@@ -45,7 +45,20 @@ public:
      */
     template<class LocalSearchType>
     VNS(LocalSearchType&& localSearch, int kmax) :
+        VNS(std::forward<LocalSearchType>(localSearch), kmax, OnImprovedSolution())
+    {
+    }
+
+    /**
+     * @brief Class constructor.
+     * @param localSearch Object applied repeatedly to get from solutions in the neighborhood to local optima.
+     * @param kmax Maximum distance between the candidate solutions and the input one.
+     * @param onImprovedSolution Callback called when a given solution is improved.
+     */
+    template<class LocalSearchType, class OnImprovedSolutionType>
+    VNS(LocalSearchType&& localSearch, int kmax, OnImprovedSolutionType&& onImprovedSolution) :
         _localSearch(std::forward<LocalSearchType>(localSearch)),
+        _onImprovedSolution(std::forward<OnImprovedSolutionType>(onImprovedSolution)),
         _kmax(kmax)
     {
         setKmax(kmax);
@@ -83,6 +96,22 @@ public:
         HIKE_ASSERT(kmax > 0);
 
         _kmax = kmax;
+    }
+
+    /**
+     * @brief Returns the callback called when a given solution is improved.
+     */
+    const OnImprovedSolution& getOnImprovedSolution() const noexcept
+    {
+        return _onImprovedSolution;
+    }
+
+    /**
+     * @brief Returns the callback called when a given solution is improved.
+     */
+    OnImprovedSolution& getOnImprovedSolution() noexcept
+    {
+        return _onImprovedSolution;
     }
 
     /**
@@ -126,6 +155,7 @@ public:
 
                 if(currentLoss < bestLoss)
                 {
+                    _onImprovedSolution(bestSolution, bestLoss, currentSolution, currentLoss, k);
                     bestSolution = std::move(currentSolution);
                     bestLoss = currentLoss;
                     k = 1;
@@ -149,6 +179,7 @@ protected:
     ///@cond INTERNAL
 
     LocalSearch _localSearch;
+    OnImprovedSolution _onImprovedSolution;
     int _kmax;
 
     ///@endcond

@@ -12,6 +12,7 @@ It currently only provides a [variable neighborhood search (VNS)](https://en.wik
 - Loss functions can return any type.
 - Calculated losses can be cached to speedup the optimization process.
 - Best improvement local search can be parallelized across all CPU threads.
+- Optimization process can be debugged through callbacks.
 - Low overhead, no heap usage (besides loss caching and parallel local search).
 - Without dependencies (besided [catch](https://github.com/catchorg/Catch2) for testing).
 - Doxygen documentation provided for API reference.
@@ -29,6 +30,7 @@ Although hike is a header-only library, a CMakeLists.txt file is provided to fac
 ## Example
 
 In this [catch](https://github.com/catchorg/Catch2) test, a 3D integer vector is optimized using VNS with first improvement local search:
+
 ```C++
 #include <array>
 #include <catch.hpp>
@@ -175,7 +177,7 @@ TEST_CASE("CachedLossFunction example")
 
 ## Parallel best improvement local search
 
-hike::ParallelBILocalSearch class provides multithread best improvement (highest descent) local search.
+hike::ParallelBILocalSearch class provides multithread best improvement (highest descent) local search.  
 
 To use it, the provided loss function must be thread safe. hike::TSCachedLossFunction provides thread safe loss caching:
 
@@ -254,6 +256,84 @@ TEST_CASE("ParallelBILocalSearch example")
     Solution solution{{ 15, -7, 22 }};
     bool optimized;
     Solution optimizedSolution = vns.optimize(solution, optimized);
+
+    // The optimized solution should be equals to the target one:
+    REQUIRE(optimized);
+    REQUIRE(optimizedSolution == targetSolution);
+}
+```
+
+## Debugging the optimization process
+
+Optimization algorithms can receive a callback as parameter. This callback is called when the given solution is improved, allowing to trace the optimization process.  
+
+In this example, the VNS object receives a callback which prints in console the input solution and the improved one:
+
+```C++
+#include <array>
+#include <iostream>
+#include <catch.hpp>
+#include "hike_fi_local_search.h"
+#include "hike_vns.h"
+
+TEST_CASE("OnImprovedSolution example")
+{
+    // Solution is a 2D integer vector. It can be of any type and size:
+    using Solution = std::array<int, 2>;
+
+    // Loss function returns an integer scalar. It can be of any type:
+    struct LossFunction
+    {
+        Solution targetSolution;
+
+        int operator()(const Solution& solution) const
+		{
+			int loss = 0;
+
+				for(std::size_t i = 0; i < solution.size(); ++i)
+			{
+				loss += std::abs(solution[i] - targetSolution[i]);
+			}
+
+				return loss;
+		}
+    };
+
+    // Callback called when a given solution has been improved in an optimization algorithm.
+    struct OnImprovedSolution
+    {
+        void operator()(const Solution& inputSolution, int inputLoss, const Solution& improvedSolution,
+	                int improvedLoss, int k) const noexcept
+		{
+			std::cout << "Solution improved (k=" << k << ")! ";
+			std::cout << "From (" << inputSolution[0] << ", " << inputSolution[1] << ") ";
+			std::cout << "(loss=" << inputLoss << ") ";
+			std::cout << "to (" << improvedSolution[0] << ", " << improvedSolution[1] << ") ";
+			std::cout << "(loss=" << improvedLoss << ") " << std::endl;
+		}
+    };
+
+    // Loss function returns the Manhattan distance between the target solution and the given one:
+    Solution targetSolution{{ 2, 5 }};
+    LossFunction lossFunction = { targetSolution };
+
+    // VNS uses first improvement (first descent) local search.
+    // Best improvement (highest descent) local search can be used too:
+    using LocalSearch = hike::FILocalSearch<Solution, LossFunction>;
+
+    // Candidate solutions are generated adding and subtracting the parameters of this solution to the given one:
+    Solution stepSolution{{ 1, 1 }};
+
+    // Declare local search object:
+    LocalSearch localSearch(lossFunction, stepSolution);
+
+    // Declare VNS object with a maximum neighborhood (kmax) of 5 and the solution improved callback class:
+    hike::VNS<Solution, LocalSearch, OnImprovedSolution> vns(localSearch, 5);
+
+    // Optimize a solution:
+    Solution solution{{ 15, -7 }};
+    bool optimized;
+    Solution optimizedSolution = vns.optimize(solution, optimized, OnImprovedSolution());
 
     // The optimized solution should be equals to the target one:
     REQUIRE(optimized);

@@ -20,6 +20,7 @@
 #define HIKE_FI_LOCAL_SEARCH_H
 
 #include "hike_local_search_base.h"
+#include "hike_empty_on_improved_solution.h"
 
 namespace hike
 {
@@ -29,8 +30,8 @@ namespace hike
  *
  * https://en.wikipedia.org/wiki/Variable_neighborhood_search
  */
-template<class Solution, class LossFunction>
-class FILocalSearch : public LocalSearchBase<LossFunction>
+template<class Solution, class LossFunction, class OnImprovedSolution = EmptyOnImprovedSolution>
+class FILocalSearch : public LocalSearchBase<LossFunction, OnImprovedSolution>
 {
 
 public:
@@ -43,7 +44,24 @@ public:
      */
     template<class LossFunctionType, class SolutionType>
     FILocalSearch(LossFunctionType&& lossFunction, SolutionType&& stepSolution, int neighborhood = 1) :
-        LocalSearchBase<LossFunction>(std::forward<LossFunctionType>(lossFunction), neighborhood),
+        FILocalSearch(std::forward<LossFunctionType>(lossFunction), std::forward<SolutionType>(stepSolution),
+                      OnImprovedSolution(), neighborhood)
+    {
+    }
+
+    /**
+     * @brief Class constructor.
+     * @param lossFunction A solution that minimizes this function is an optimal solution.
+     * @param stepSolution Candidate solutions are generated adding and subtracting
+     * the parameters of this solution to the input one.
+     * @param onImprovedSolution Callback called when a given solution is improved.
+     * @param neighborhood Distance between the candidate solutions and the input one.
+     */
+    template<class LossFunctionType, class SolutionType, class OnImprovedSolutionType>
+    FILocalSearch(LossFunctionType&& lossFunction, SolutionType&& stepSolution,
+                  OnImprovedSolutionType&& onImprovedSolution, int neighborhood = 1) :
+        _BaseClass(std::forward<LossFunctionType>(lossFunction),
+                   std::forward<OnImprovedSolutionType>(onImprovedSolution), neighborhood),
         _stepSolution(std::forward<SolutionType>(stepSolution))
     {
     }
@@ -82,7 +100,7 @@ public:
 protected:
     ///@cond INTERNAL
 
-    using _BaseClass = LocalSearchBase<LossFunction>;
+    using _BaseClass = LocalSearchBase<LossFunction, OnImprovedSolution>;
 
     Solution _stepSolution;
 
@@ -105,6 +123,7 @@ protected:
 
         if(currentLoss < bestLoss)
         {
+            _BaseClass::_onImprovedSolution(bestLoss, solution, currentLoss, _BaseClass::_neighborhood);
             return true;
         }
 
@@ -123,6 +142,7 @@ protected:
 
             if(currentLoss < bestLoss)
             {
+                _BaseClass::_onImprovedSolution(bestLoss, solution, currentLoss, _BaseClass::_neighborhood);
                 return true;
             }
         }
@@ -139,6 +159,7 @@ protected:
 
         if(currentLoss < bestLoss)
         {
+            _BaseClass::_onImprovedSolution(bestLoss, solution, currentLoss, _BaseClass::_neighborhood);
             return true;
         }
 

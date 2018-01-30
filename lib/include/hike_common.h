@@ -32,6 +32,9 @@ namespace hike
 // Library assert macro:
 #define HIKE_ASSERT(condition) assert((condition))
 
+// Unused variable macro:
+#define HIKE_UNUSED(variable) (void)(variable)
+
 }
 
 #endif

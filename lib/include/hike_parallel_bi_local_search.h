@@ -20,6 +20,7 @@
 #define HIKE_PARALLEL_BI_LOCAL_SEARCH_H
 
 #include "hike_local_search_base.h"
+#include "hike_empty_on_improved_solution.h"
 #include "hike_thread_pool.h"
 
 namespace hike
@@ -32,8 +33,8 @@ namespace hike
  *
  * Please note than the given loss function must be thread safe.
  */
-template<class Solution, class LossFunction>
-class ParallelBILocalSearch : public LocalSearchBase<LossFunction>
+template<class Solution, class LossFunction, class OnImprovedSolution = EmptyOnImprovedSolution>
+class ParallelBILocalSearch : public LocalSearchBase<LossFunction, OnImprovedSolution>
 {
 
 public:
@@ -46,7 +47,24 @@ public:
      */
     template<class LossFunctionType, class SolutionType>
     ParallelBILocalSearch(LossFunctionType&& lossFunction, SolutionType&& stepSolution, int neighborhood = 1) :
-        LocalSearchBase<LossFunction>(std::forward<LossFunctionType>(lossFunction), neighborhood),
+        ParallelBILocalSearch(std::forward<LossFunctionType>(lossFunction), std::forward<SolutionType>(stepSolution),
+                              OnImprovedSolution(), neighborhood)
+    {
+    }
+
+    /**
+     * @brief Class constructor.
+     * @param lossFunction A solution that minimizes this function is an optimal solution. It must be thread safe.
+     * @param stepSolution Candidate solutions are generated adding and subtracting
+     * the parameters of this solution to the input one.
+     * @param onImprovedSolution Callback called when a given solution is improved.
+     * @param neighborhood Distance between the candidate solutions and the input one.
+     */
+    template<class LossFunctionType, class SolutionType, class OnImprovedSolutionType>
+    ParallelBILocalSearch(LossFunctionType&& lossFunction, SolutionType&& stepSolution,
+                          OnImprovedSolutionType&& onImprovedSolution, int neighborhood = 1) :
+        _BaseClass(std::forward<LossFunctionType>(lossFunction),
+                   std::forward<OnImprovedSolutionType>(onImprovedSolution), neighborhood),
         _stepSolution(std::forward<SolutionType>(stepSolution)),
         _threadPool(new ThreadPool<LossTask>())
     {
@@ -88,12 +106,16 @@ public:
         _threadPool->join();
         optimized = false;
 
-        for(const SolutionLossPair& solutionAndLoss : _solutionsAndLosses)
+        for(SolutionLossPair& solutionAndLoss : _solutionsAndLosses)
         {
-            if(solutionAndLoss.second < bestLoss)
+            auto loss = solutionAndLoss.second;
+
+            if(loss < bestLoss)
             {
-                bestSolution = std::move(solutionAndLoss.first);
-                bestLoss = solutionAndLoss.second;
+                Solution& improvedSolution = solutionAndLoss.first;
+                _BaseClass::_onImprovedSolution(bestSolution, bestLoss, improvedSolution, loss, _BaseClass::_neighborhood);
+                bestSolution = std::move(improvedSolution);
+                bestLoss = loss;
                 optimized = true;
             }
         }
@@ -106,7 +128,7 @@ public:
 protected:
     ///@cond INTERNAL
 
-    using _BaseClass = LocalSearchBase<LossFunction>;
+    using _BaseClass = LocalSearchBase<LossFunction, OnImprovedSolution>;
     using LossType = typename std::result_of<LossFunction(const Solution&)>::type;
     using SolutionLossPair = std::pair<Solution, LossType>;
 

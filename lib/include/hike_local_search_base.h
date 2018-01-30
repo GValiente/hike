@@ -30,7 +30,7 @@ namespace hike
  *
  * https://en.wikipedia.org/wiki/Variable_neighborhood_search
  */
-template<class LossFunction>
+template<class LossFunction, class OnImprovedSolution>
 class LocalSearchBase
 {
 
@@ -69,15 +69,33 @@ public:
         _neighborhood = neighborhood;
     }
 
+    /**
+     * @brief Returns the callback called when a given solution is improved.
+     */
+    const OnImprovedSolution& getOnImprovedSolution() const noexcept
+    {
+        return _onImprovedSolution;
+    }
+
+    /**
+     * @brief Returns the callback called when a given solution is improved.
+     */
+    OnImprovedSolution& getOnImprovedSolution() noexcept
+    {
+        return _onImprovedSolution;
+    }
+
 protected:
     ///@cond INTERNAL
 
     LossFunction _lossFunction;
+    OnImprovedSolution _onImprovedSolution;
     int _neighborhood;
 
-    template<class LossFunctionType>
-    LocalSearchBase(LossFunctionType&& lossFunction, int neighborhood) :
-        _lossFunction(std::forward<LossFunctionType>(lossFunction))
+    template<class LossFunctionType, class OnImprovedSolutionType>
+    LocalSearchBase(LossFunctionType&& lossFunction, OnImprovedSolutionType&& onImprovedSolution, int neighborhood) :
+        _lossFunction(std::forward<LossFunctionType>(lossFunction)),
+        _onImprovedSolution(std::forward<OnImprovedSolutionType>(onImprovedSolution))
     {
         setNeighborhood(neighborhood);
     }

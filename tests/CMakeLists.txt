@@ -9,9 +9,11 @@ set(SOURCES
     src/vns_example_test.cpp
     src/cached_loss_function_example_test.cpp
     src/parallel_bi_local_search_example_test.cpp
+    src/on_improved_solution_example_test.cpp
     src/one_dim_vns_tests.cpp
     src/two_dim_vns_tests.cpp
     src/three_dim_vns_tests.cpp
+    src/thread_pool_tests.cpp
 )
 
 # Add a executable with the above sources:

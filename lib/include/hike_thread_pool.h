@@ -23,7 +23,6 @@
 #include <deque>
 #include <thread>
 #include <mutex>
-#include <chrono>
 #include <condition_variable>
 #include "hike_common.h"
 
@@ -53,8 +52,8 @@ public:
      * @param threads Number of threads to manage.
      */
     explicit ThreadPool(unsigned int threads) :
-        _pendingTasks(0),
-        _exit(false)
+        _exit(false),
+        _pendingTasks(0)
     {
         HIKE_ASSERT(threads > 0);
 
@@ -80,13 +79,18 @@ public:
 
                     Task task = std::move(_tasks[0]);
                     _tasks.pop_front();
-
                     lock.unlock();
                     task();
 
-                    _mutex.lock();
+                    std::unique_lock<std::mutex> pendingTasksLock(_pendingTasksMutex);
+
                     --_pendingTasks;
-                    _mutex.unlock();
+
+                    if(! _pendingTasks)
+                    {
+                        pendingTasksLock.unlock();
+                        _pendingTasksCondition.notify_one();
+                    }
                 }
             });
         }
@@ -119,8 +123,11 @@ public:
         std::unique_lock<std::mutex> lock(_mutex);
 
         _tasks.emplace_back(std::forward<TaskType>(task));
-        ++_pendingTasks;
         _condition.notify_one();
+
+        std::unique_lock<std::mutex> pendingTasksLock(_pendingTasksMutex);
+
+        ++_pendingTasks;
     }
 
     /**
@@ -128,25 +135,9 @@ public:
      */
     void join()
     {
-        while(true)
-        {
-            int pendingTasks;
+        std::unique_lock<std::mutex> pendingTasksLock(_pendingTasksMutex);
 
-            {
-                std::unique_lock<std::mutex> lock(_mutex);
-
-                pendingTasks = _pendingTasks;
-            }
-
-            if(pendingTasks)
-            {
-                std::this_thread::sleep_for(std::chrono::nanoseconds(1));
-            }
-            else
-            {
-                return;
-            }
-        }
+        _pendingTasksCondition.wait(pendingTasksLock, [this]{ return ! _pendingTasks; });
     }
 
 protected:
@@ -154,10 +145,13 @@ protected:
 
     std::mutex _mutex;
     std::condition_variable _condition;
-    int _pendingTasks;
-    bool _exit;
     std::deque<Task> _tasks;
     std::vector<std::thread> _threads;
+    bool _exit;
+
+    std::mutex _pendingTasksMutex;
+    std::condition_variable _pendingTasksCondition;
+    int _pendingTasks;
 
     ///@endcond
 };
