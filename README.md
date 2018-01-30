@@ -269,7 +269,7 @@ TEST_CASE("ParallelBILocalSearch example")
 
 Optimization algorithms can receive a callback as parameter. This callback is called when the given solution is improved, allowing to trace the optimization process.  
 
-In this example, `hike::VNS` class receives a callback which prints in console the input solution and the improved one. Local search classes can receive it too:
+In this example, `hike::VNS` class receives a callback which prints in console the input solution and the improved one. Please note that local search classes can receive it too:
 
 ```C++
 #include <array>
