@@ -20,7 +20,7 @@ It currently only provides a [variable neighborhood search (VNS)](https://en.wik
 
 ## Tested compilers
 
-- GCC 5.3.
+- GCC 4.9.
 - MSVC 15.0 (Visual Studio 2017).
 
 ## Usage
