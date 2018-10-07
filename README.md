@@ -14,7 +14,7 @@ It currently only provides a [variable neighborhood search (VNS)](https://en.wik
 - Best improvement local search can be parallelized across all CPU threads.
 - Optimization process can be debugged through callbacks.
 - Low overhead, no heap usage (besides loss caching and parallel local search).
-- Without dependencies (besided [catch](https://github.com/catchorg/Catch2) for testing).
+- Without dependencies (besides [catch](https://github.com/catchorg/Catch2) for testing).
 - Doxygen documentation provided for API reference.
 - Licensed under [zlib license](LICENSE.txt).
 
@@ -31,7 +31,7 @@ Doxygen documentation can be generated with `doxygen Doxyfile`.
 
 ## Example
 
-In this [catch](https://github.com/catchorg/Catch2) test, a 3D integer vector is optimized using VNS with first improvement local search:
+In this [catch-mini](https://github.com/GValiente/catch-mini) test, a 3D integer vector is optimized using VNS with first improvement local search:
 
 ```C++
 #include <array>
@@ -92,7 +92,7 @@ TEST_CASE("VNS example")
 
 ## Using loss caching
 
-With `hike::CachedLossFunction` class, calculated losses for the same solutions are cached to avoid to recalculate them in following iterations:
+With `hike::CachedLossFunction` class, calculated losses for the same solutions are cached to avoid recalculating them in following iterations:
 
 ```C++
 #include <array>
