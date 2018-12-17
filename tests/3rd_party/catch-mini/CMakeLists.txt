@@ -1,5 +1,8 @@
-cmake_minimum_required(VERSION 3.0)
-project(catch)
+cmake_minimum_required(VERSION 3.4)
+project(catch-mini)
+
+# Enable C++11:
+set(CMAKE_CXX_STANDARD 11)
 
 # Define sources:
 set(SOURCES

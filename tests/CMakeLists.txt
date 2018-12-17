@@ -29,9 +29,9 @@ target_link_libraries(${PROJECT_NAME}
     hike
 )
 
-# Include catch library:
-add_subdirectory(3rd_party/catch)
-target_link_libraries(${PROJECT_NAME} catch)
+# Include catch-mini library:
+add_subdirectory(3rd_party/catch-mini)
+target_link_libraries(${PROJECT_NAME} catch-mini)
 
 # Include pthread (GCC only) (if you don't need ParallelBILocalSearch, you can remove this dependency):
 if(CMAKE_COMPILER_IS_GNUCC)
