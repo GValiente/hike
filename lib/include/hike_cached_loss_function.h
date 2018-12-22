@@ -27,7 +27,7 @@ namespace hike
 /**
  * @brief Remembers previously calculated losses.
  */
-template<class Solution, class LossFunction>
+template<class Solution, class LossFunction, class SolutionHash = std::hash<Solution>>
 class CachedLossFunction
 {
 
@@ -77,7 +77,7 @@ protected:
     ///@cond INTERNAL
 
     LossFunction _lossFunction;
-    std::unordered_map<Solution, LossType> _losses;
+    std::unordered_map<Solution, LossType, SolutionHash> _losses;
 
     ///@endcond
 };

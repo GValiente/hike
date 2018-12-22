@@ -14,7 +14,7 @@ namespace hike
  *
  * This class is thread safe as long as the child loss function is thread safe too.
  */
-template<class Solution, class LossFunction>
+template<class Solution, class LossFunction, class SolutionHash = std::hash<Solution>>
 class TSCachedLossFunction
 {
 
@@ -75,7 +75,7 @@ protected:
     ///@cond INTERNAL
 
     LossFunction _lossFunction;
-    std::unordered_map<Solution, LossType> _losses;
+    std::unordered_map<Solution, LossType, SolutionHash> _losses;
     std::unique_ptr<std::mutex> _mutex;
 
     ///@endcond
